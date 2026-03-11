@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anselm Waterfield</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1f3c;
+      --navy-light: #1a3259;
+      --teal: #00b4a2;
+      --teal-light: #e8f9f7;
+      --sand: #f7f4ef;
+      --dark: #1c1c1e;
+      --mid: #4a5568;
+      --light: #a0aec0;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(13, 31, 60, 0.96);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e4a6e 100%);
+      display: flex; align-items: center;
+      padding: 6rem 4rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: -30%; right: -10%;
+      width: 70vw; height: 70vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,180,162,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -20%; left: -5%;
+      width: 40vw; height: 40vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,180,162,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--teal);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: #009d8d; transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll span { writing-mode: vertical-rl; }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 6rem 4rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+    }
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--teal);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--sand);
+      border-radius: 8px;
+      padding: 1.75rem;
+      border-left: 3px solid var(--teal);
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 700;
+      color: var(--navy); line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--mid); letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ─── CAREER ─── */
+    #career { background: var(--sand); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+    }
+    .timeline-item {
+      position: relative; padding: 0 0 3rem 2rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute; left: -6px; top: 6px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: 3px solid var(--sand);
+      box-shadow: 0 0 0 2px var(--teal);
+    }
+    .timeline-period {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--teal); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .timeline-role {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 0.2rem;
+    }
+    .timeline-company {
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--mid); margin-bottom: 0.8rem;
+    }
+    .timeline-desc {
+      font-size: 0.95rem; color: var(--mid);
+      line-height: 1.75; max-width: 620px;
+    }
+
+    /* ─── VENTURES ─── */
+    #ventures { background: var(--white); }
+    .ventures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .venture-card {
+      border: 1px solid #e8edf2;
+      border-radius: 10px;
+      padding: 2.25rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .venture-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(13,31,60,0.1);
+    }
+    .venture-icon {
+      width: 48px; height: 48px;
+      background: var(--teal-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.5rem;
+    }
+    .venture-name {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 0.4rem;
+    }
+    .venture-type {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--teal); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.85rem;
+    }
+    .venture-desc {
+      font-size: 0.93rem; color: var(--mid);
+      line-height: 1.75;
+    }
+    .venture-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--sand);
+      color: var(--navy);
+      font-size: 0.75rem; font-weight: 600;
+      padding: 0.3rem 0.85rem;
+      border-radius: 20px;
+    }
+
+    /* ─── EXPERTISE ─── */
+    #expertise { background: var(--navy); }
+    #expertise .section-title { color: var(--white); }
+    #expertise .section-label { color: var(--teal); }
+    #expertise .divider { background: var(--teal); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .skill-item:hover {
+      background: rgba(0,180,162,0.12);
+      border-color: rgba(0,180,162,0.4);
+    }
+    .skill-name {
+      font-size: 1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .skill-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+
+    /* ─── BEYOND ─── */
+    #beyond { background: var(--sand); }
+    .beyond-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .beyond-text p {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .triathlon-block {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2.25rem;
+      box-shadow: 0 4px 24px rgba(13,31,60,0.07);
+    }
+    .triathlon-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .triathlon-desc {
+      font-size: 0.95rem; color: var(--mid);
+      line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .disciplines {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .discipline {
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 0.82rem; font-weight: 700;
+      padding: 0.4rem 1rem;
+      border-radius: 20px; letter-spacing: 0.05em;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-text p {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .contact-links {
+      display: flex; flex-direction: column; gap: 1rem;
+      margin-top: 2rem;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      color: var(--navy); text-decoration: none;
+      font-weight: 500;
+      padding: 1rem 1.25rem;
+      border: 1px solid #e8edf2;
+      border-radius: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--teal);
+      background: var(--teal-light);
+    }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: var(--teal-light);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-form {
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.85rem 1rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--teal);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1rem;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .form-submit:hover { background: var(--teal); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      padding: 2rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.1rem;
+    }
+    .footer-note {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-socials { display: flex; gap: 1rem; }
+    .footer-social {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none; font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .footer-social:hover { background: var(--teal); color: var(--white); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 5rem 1.5rem 4rem; }
+      .about-grid, .beyond-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">AW</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#ventures">Ventures</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#beyond">Beyond Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Entrepreneur · Engineer · Executive</p>
+      <h1 class="hero-name">Anselm<br/>Waterfield</h1>
+      <p class="hero-tagline">
+        Building technology businesses that matter — from telco infrastructure to enterprise software, and the ventures still to come.
+      </p>
+      <a href="#about" class="hero-cta">
+        Discover my story
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">About Me</p>
+          <h2 class="section-title">Engineer at heart,<br/>entrepreneur by calling</h2>
+          <div class="divider"></div>
+          <p>
+            My career began in the trenches of the telecommunications industry — working with British Telecom, Racal-Milgo, and Unisys before joining <strong>Optus in 1992</strong> during its startup phase, where I played a significant role in shaping its banking sector strategy and pioneering managed services in Australia.
+          </p>
+          <p>
+            From that foundation I moved into building businesses from scratch: an ERP software distribution business, then the creation of what became the <strong>largest and most successful IP owner and supplier of enterprise software to the Australian and New Zealand domestic logistics market</strong>.
+          </p>
+          <p>
+            Today I'm active as a founder, mentor, and investor — particularly drawn to SME technology businesses where strategic focus and operational discipline can unlock outsized value. I'm based in <strong>Sydney, Australia</strong>.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Years in Tech & Telco</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Major Companies Founded</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">1992</div>
+            <div class="stat-label">Joined Optus at Startup</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">SYD</div>
+            <div class="stat-label">Based in Sydney, AU</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section id="career">
+    <div class="section-inner">
+      <p class="section-label">Career</p>
+      <h2 class="section-title">A career built on<br/>building things</h2>
+      <div class="divider"></div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <p class="timeline-period">2012 — Present</p>
+          <p class="timeline-role">Executive Chairman & Founder</p>
+          <p class="timeline-company">contactSPACE · Sydney, Australia</p>
+          <p class="timeline-desc">
+            Co-founded contactSPACE, an enterprise call centre and customer engagement software company. Responsible for strategic direction, capital allocation, and scaling the business across the Australian market and beyond with partners including Genesys, AWS, and Verizon.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-period">~2000 — 2012</p>
+          <p class="timeline-role">CEO & Founder</p>
+          <p class="timeline-company">Translogix Systems Pty Ltd · Australia / New Zealand</p>
+          <p class="timeline-desc">
+            Founded and scaled Translogix into the largest IP owner, developer, and supplier of enterprise software to the Australian and NZ domestic logistics market. Led the acquisition of Transit Computer Systems in 2010 and won the NSW iAward for Transport &amp; Distribution Solution. In 2012 Translogix was acquired by CargoWise, the world's fastest-growing international logistics execution software company.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-period">Mid 1990s — 2000s</p>
+          <p class="timeline-role">Founder</p>
+          <p class="timeline-company">ERP Software Distribution Business · Australia</p>
+          <p class="timeline-desc">
+            Established a successful ERP software distribution business, developing deep expertise in enterprise software commercialisation and the go-to-market strategies that would underpin the Translogix years.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-period">1992 — Mid 1990s</p>
+          <p class="timeline-role">Senior Executive</p>
+          <p class="timeline-company">Optus · Sydney, Australia</p>
+          <p class="timeline-desc">
+            Joined Optus in its startup phase and was a significant contributor to its success in the banking industry and the introduction of managed services to the Australian market — a genuinely formative period in Australian telecommunications history.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-period">Late 1980s — 1992</p>
+          <p class="timeline-role">Engineer</p>
+          <p class="timeline-company">British Telecom · Racal-Milgo · Unisys</p>
+          <p class="timeline-desc">
+            Began career as a telecommunications engineer, building the technical foundations and rigorous problem-solving mindset that would shape every subsequent venture.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENTURES -->
+  <section id="ventures">
+    <div class="section-inner">
+      <p class="section-label">Ventures</p>
+      <h2 class="section-title">Companies I've built</h2>
+      <div class="divider"></div>
+      <div class="ventures-grid">
+        <div class="venture-card">
+          <div class="venture-icon">📞</div>
+          <p class="venture-type">Current Venture</p>
+          <p class="venture-name">contactSPACE</p>
+          <p class="venture-desc">
+            An enterprise contact centre and customer engagement platform helping organisations deliver smarter, more efficient customer interactions. Built on deep integration partnerships with Genesys, AWS, and Verizon and focused on the ANZ and broader APAC market.
+          </p>
+          <span class="venture-tag">Enterprise Software</span>
+        </div>
+        <div class="venture-card">
+          <div class="venture-icon">🚛</div>
+          <p class="venture-type">Acquired 2012 by CargoWise</p>
+          <p class="venture-name">Translogix Systems</p>
+          <p class="venture-desc">
+            Australia and New Zealand's largest provider of enterprise software to the domestic logistics market. Built from the ground up to become the definitive platform for transport operators, culminating in acquisition by WiseTech Global's CargoWise division in July 2012.
+          </p>
+          <span class="venture-tag">Logistics Software · Acquired</span>
+        </div>
+        <div class="venture-card">
+          <div class="venture-icon">🤝</div>
+          <p class="venture-type">Advisory & Investment</p>
+          <p class="venture-name">Mentoring & SME Investment</p>
+          <p class="venture-desc">
+            Actively working with early-to-growth stage technology businesses as a mentor and investor. Particularly interested in SME technology companies where strategic clarity, operational discipline, and market focus can create significant value.
+          </p>
+          <span class="venture-tag">Technology · Strategy · M&A</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <div class="section-inner">
+      <p class="section-label">Expertise</p>
+      <h2 class="section-title">Where I can add value</h2>
+      <div class="divider"></div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <p class="skill-name">Strategy & Vision</p>
+          <p class="skill-desc">Translating market insight into actionable strategic direction — from startup positioning through to mature business transformation.</p>
+        </div>
+        <div class="skill-item">
+          <p class="skill-name">Mergers & Acquisitions</p>
+          <p class="skill-desc">Hands-on M&A experience on both sides of the table, including the successful acquisition of Translogix by CargoWise.</p>
+        </div>
+        <div class="skill-item">
+          <p class="skill-name">Innovation & R&D</p>
+          <p class="skill-desc">Building product development processes that balance customer needs with technical ambition — creating software products that dominate their niches.</p>
+        </div>
+        <div class="skill-item">
+          <p class="skill-name">Sales & Commercialisation</p>
+          <p class="skill-desc">Taking products from development to revenue — go-to-market strategy, channel development, and enterprise sales in competitive B2B markets.</p>
+        </div>
+        <div class="skill-item">
+          <p class="skill-name">Organisational Development</p>
+          <p class="skill-desc">Building teams and cultures that scale — from the first hires through to multi-functional organisations spanning engineering, sales, and support.</p>
+        </div>
+        <div class="skill-item">
+          <p class="skill-name">Telecommunications</p>
+          <p class="skill-desc">Deep roots in telco infrastructure and managed services, providing a technical foundation that informs every technology investment and product decision.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND -->
+  <section id="beyond">
+    <div class="section-inner">
+      <p class="section-label">Beyond Work</p>
+      <h2 class="section-title">The other side<br/>of the ledger</h2>
+      <div class="divider"></div>
+      <div class="beyond-grid">
+        <div class="beyond-text">
+          <p>
+            Entrepreneurship is a full-person pursuit — and I've always believed that the discipline and resilience you build outside of work feeds directly into what you're capable of inside it.
+          </p>
+          <p>
+            I'm an aspiring triathlete, which means I spend a reasonable amount of time convincing myself that the alarm going off at 5am is, in fact, a good idea. The swim-bike-run combination suits me: each discipline requires a different kind of focus, and stringing them together into something coherent feels surprisingly like building a company.
+          </p>
+          <p>
+            I'm also an active mentor — I genuinely enjoy spending time with founders who are earlier in their journeys, working through the messy, exciting, difficult decisions that define whether a business reaches its potential.
+          </p>
+        </div>
+        <div class="triathlon-block">
+          <p class="triathlon-title">Wannabe Triathlete 🏊 🚴 🏃</p>
+          <p class="triathlon-desc">
+            Triathlon has a particular appeal for someone who has spent a career in technology: it rewards systems thinking, incremental improvement, and the willingness to be a beginner again. Still working on the "wannabe" part.
+          </p>
+          <div class="disciplines">
+            <span class="discipline">Swim</span>
+            <span class="discipline">Bike</span>
+            <span class="discipline">Run</span>
+            <span class="discipline">Sydney-based</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's have<br/>a conversation</h2>
+      <div class="divider"></div>
+      <div class="contact-grid">
+        <div class="contact-text">
+          <p>
+            I'm always open to conversations with founders, executives, and investors — whether you're looking for a mentor, exploring an acquisition, or just want to exchange ideas about where enterprise technology is heading.
+          </p>
+          <p>
+            I'm particularly interested in meeting technology businesses at growth stage that are looking for strategic input, capital, or connections.
+          </p>
+          <div class="contact-links">
+            <a href="https://x.com/anselmw" target="_blank" class="contact-link">
+              <div class="contact-link-icon">𝕏</div>
+              <span>@anselmw on X / Twitter</span>
+            </a>
+            <a href="http://www.anselmwaterfield.com" target="_blank" class="contact-link">
+              <div class="contact-link-icon">🌐</div>
+              <span>anselmwaterfield.com</span>
+            </a>
+            <a href="mailto:anselmwaterfield@gmail.com" class="contact-link">
+              <div class="contact-link-icon">✉</div>
+              <span>anselmwaterfield@gmail.com</span>
+            </a>
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — I\'ll be in touch soon.');">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="jane@company.com" />
+          </div>
+          <div class="form-group">
+            <label>What's this about?</label>
+            <select>
+              <option value="">Select a topic…</option>
+              <option>Mentoring / Advisory</option>
+              <option>Investment Opportunity</option>
+              <option>Speaking / Media</option>
+              <option>contactSPACE</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell me a little about what you have in mind…"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Anselm Waterfield</span>
+    <span class="footer-note">Sydney, Australia · © 2026</span>
+    <div class="footer-socials">
+      <a href="https://x.com/anselmw" target="_blank" class="footer-social" title="X / Twitter">𝕏</a>
+      <a href="http://www.anselmwaterfield.com" target="_blank" class="footer-social" title="Website">🌐</a>
+      <a href="mailto:anselmwaterfield@gmail.com" class="footer-social" title="Email">✉</a>
+    </div>
+  </footer>
+
+</body>
+</html>
