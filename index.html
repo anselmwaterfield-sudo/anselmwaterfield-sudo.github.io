@@ -476,10 +476,52 @@
     }
     .footer-social:hover { background: var(--teal); color: var(--white); }
 
+    /* ─── HAMBURGER ─── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
+      nav { padding: 1rem 1.5rem; align-items: center; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 56px; left: 0; right: 0;
+        background: rgba(13, 31, 60, 0.98);
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 1rem 0 1.5rem;
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; text-align: center; }
+      .nav-links a {
+        display: block;
+        padding: 0.9rem 1rem;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
       section { padding: 4rem 1.5rem; }
       #hero { padding: 5rem 1.5rem 4rem; }
       .about-grid, .beyond-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -493,15 +535,28 @@
   <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-logo">AW</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#career">Career</a></li>
-      <li><a href="#ventures">Ventures</a></li>
-      <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#beyond">Beyond Work</a></li>
-      <li><a href="#contact">Contact</a></li>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#career" onclick="closeMenu()">Career</a></li>
+      <li><a href="#ventures" onclick="closeMenu()">Ventures</a></li>
+      <li><a href="#expertise" onclick="closeMenu()">Expertise</a></li>
+      <li><a href="#beyond" onclick="closeMenu()">Beyond Work</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <script>
+    function toggleMenu() {
+      document.getElementById('nav-links').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('nav-links').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+  </script>
 
   <!-- HERO -->
   <section id="hero">
