@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anselm Waterfield</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://www.google.com/recaptcha/api.js?render=6Le77YksAAAAAGpR1mBNHzi84BKsWLMv1f1qlKjG"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -789,12 +790,15 @@
             e.preventDefault();
             const form = e.target;
             const btn = document.getElementById('submit-btn');
-            btn.textContent = 'Sending…';
+            btn.textContent = 'Verifying…';
             btn.disabled = true;
             try {
+              const token = await grecaptcha.execute('6Le77YksAAAAAGpR1mBNHzi84BKsWLMv1f1qlKjG', { action: 'contact' });
+              const data = new FormData(form);
+              data.append('g-recaptcha-response', token);
               const res = await fetch(form.action, {
                 method: 'POST',
-                body: new FormData(form),
+                body: data,
                 headers: { 'Accept': 'application/json' }
               });
               if (res.ok) {
@@ -811,6 +815,11 @@
             }
           }
         </script>
+        <p style="font-size:0.75rem; color: var(--light); margin-top: 0.5rem; text-align:center;">
+          Protected by reCAPTCHA —
+          <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--light);">Privacy</a> &
+          <a href="https://policies.google.com/terms" target="_blank" style="color: var(--light);">Terms</a>
+        </p>
       </div>
     </div>
   </section>
@@ -821,7 +830,6 @@
     <span class="footer-note">Sydney, Australia · © 2026</span>
     <div class="footer-socials">
       <a href="https://x.com/anselmw" target="_blank" class="footer-social" title="X / Twitter">𝕏</a>
-      <a href="http://www.anselmwaterfield.com" target="_blank" class="footer-social" title="Website">🌐</a>
       <a href="mailto:anselm@anselmwaterfield.com" class="footer-social" title="Email">✉</a>
     </div>
   </footer>
