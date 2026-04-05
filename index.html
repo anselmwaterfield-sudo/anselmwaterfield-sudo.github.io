@@ -1,915 +1,543 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anselm Waterfield</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Anselm Waterfield | Entrepreneur. Engineer. Executive.</title>
+  <meta name="description" content="Anselm Waterfield — 30 years building technology businesses that matter. Entrepreneur, engineer, and executive based in Sydney, Australia." />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <script src="https://www.google.com/recaptcha/api.js?render=6Le77YksAAAAAGpR1mBNHzi84BKsWLMv1f1qlKjG"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #0d1f3c;
-      --navy-light: #1a3259;
-      --teal: #00b4a2;
-      --teal-light: #e8f9f7;
-      --sand: #f7f4ef;
-      --dark: #1c1c1e;
-      --mid: #4a5568;
-      --light: #a0aec0;
-      --white: #ffffff;
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--dark);
-      line-height: 1.6;
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(13, 31, 60, 0.96);
-      backdrop-filter: blur(8px);
+    .animate-fade-in-up {
+      animation: fade-in-up 0.7s ease-out both;
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--white);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--teal); }
-
-    /* ─── HERO ─── */
-    #hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e4a6e 100%);
-      display: flex; align-items: center;
-      padding: 6rem 4rem 4rem;
-      position: relative; overflow: hidden;
-    }
-    #hero::before {
-      content: '';
-      position: absolute; top: -30%; right: -10%;
-      width: 70vw; height: 70vw;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,180,162,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    #hero::after {
-      content: '';
-      position: absolute; bottom: -20%; left: -5%;
-      width: 40vw; height: 40vw;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,180,162,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-content { max-width: 720px; position: relative; z-index: 1; }
-    .hero-eyebrow {
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1.2rem;
-    }
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.05;
-      margin-bottom: 1.5rem;
-    }
-    .hero-statement {
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      color: rgba(255,255,255,0.92);
-      font-weight: 400;
-      max-width: 560px;
-      margin-bottom: 1.5rem;
-      line-height: 1.75;
-      border-left: 3px solid var(--teal);
-      padding-left: 1.1rem;
-    }
-    .hero-tagline {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: rgba(255,255,255,0.7);
-      font-weight: 300;
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: var(--teal);
-      color: var(--white);
-      padding: 0.9rem 2rem;
-      border-radius: 3px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .hero-cta:hover { background: #009d8d; transform: translateY(-2px); }
-    .hero-scroll {
-      position: absolute; bottom: 2.5rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-      animation: bounce 2s infinite;
-    }
-    .hero-scroll span { writing-mode: vertical-rl; }
-    .scroll-line {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
-    }
-    @keyframes bounce {
+    .animate-delay-1 { animation-delay: 0.1s; }
+    .animate-delay-2 { animation-delay: 0.2s; }
+    .animate-delay-3 { animation-delay: 0.35s; }
+    .animate-delay-4 { animation-delay: 0.5s; }
+    @keyframes bounce-subtle {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50% { transform: translateX(-50%) translateY(8px); }
     }
-
-    /* ─── SECTIONS ─── */
-    section { padding: 6rem 4rem; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.78rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 0.75rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 1.5rem;
-      line-height: 1.15;
-    }
-    .divider {
-      width: 48px; height: 3px;
-      background: var(--teal);
-      margin-bottom: 2.5rem;
-    }
-
-    /* ─── ABOUT ─── */
-    #about { background: var(--white); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 1.05rem;
-      color: var(--mid);
-      line-height: 1.85;
-      margin-bottom: 1.25rem;
-    }
-    .about-stats {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .stat-card {
-      background: var(--sand);
-      border-radius: 8px;
-      padding: 1.75rem;
-      border-left: 3px solid var(--teal);
-    }
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem; font-weight: 700;
-      color: var(--navy); line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .stat-label {
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--mid); letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    /* ─── CAREER ─── */
-    #career { background: var(--sand); }
-    .timeline { position: relative; padding-left: 2rem; }
-    .timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--teal), transparent);
-    }
-    .timeline-item {
-      position: relative; padding: 0 0 3rem 2rem;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute; left: -6px; top: 6px;
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--teal);
-      border: 3px solid var(--sand);
-      box-shadow: 0 0 0 2px var(--teal);
-    }
-    .timeline-period {
-      font-size: 0.78rem; font-weight: 700;
-      color: var(--teal); letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 0.4rem;
-    }
-    .timeline-role {
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 0.2rem;
-    }
-    .timeline-company {
-      font-size: 0.9rem; font-weight: 600;
-      color: var(--mid); margin-bottom: 0.8rem;
-    }
-    .timeline-desc {
-      font-size: 0.95rem; color: var(--mid);
-      line-height: 1.75; max-width: 620px;
-    }
-
-    /* ─── VENTURES ─── */
-    #ventures { background: var(--white); }
-    .ventures-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .venture-card {
-      border: 1px solid #e8edf2;
-      border-radius: 10px;
-      padding: 2.25rem;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .venture-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(13,31,60,0.1);
-    }
-    .venture-icon {
-      width: 48px; height: 48px;
-      background: var(--teal-light);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.25rem;
-      font-size: 1.5rem;
-    }
-    .venture-name {
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 0.4rem;
-    }
-    .venture-type {
-      font-size: 0.78rem; font-weight: 700;
-      color: var(--teal); letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 0.85rem;
-    }
-    .venture-desc {
-      font-size: 0.93rem; color: var(--mid);
-      line-height: 1.75;
-    }
-    .venture-tag {
-      display: inline-block;
-      margin-top: 1rem;
-      background: var(--sand);
-      color: var(--navy);
-      font-size: 0.75rem; font-weight: 600;
-      padding: 0.3rem 0.85rem;
-      border-radius: 20px;
-    }
-
-    /* ─── EXPERTISE ─── */
-    #expertise { background: var(--navy); }
-    #expertise .section-title { color: var(--white); }
-    #expertise .section-label { color: var(--teal); }
-    #expertise .divider { background: var(--teal); }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .skill-item {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 1.75rem;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .skill-item:hover {
-      background: rgba(0,180,162,0.12);
-      border-color: rgba(0,180,162,0.4);
-    }
-    .skill-name {
-      font-size: 1rem; font-weight: 600;
-      color: var(--white); margin-bottom: 0.5rem;
-    }
-    .skill-desc {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.65;
-    }
-
-    /* ─── BEYOND ─── */
-    #beyond { background: var(--sand); }
-    .beyond-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .beyond-cards { display: flex; flex-direction: column; }
-    .beyond-text p {
-      font-size: 1.05rem;
-      color: var(--mid);
-      line-height: 1.85;
-      margin-bottom: 1.25rem;
-    }
-    .triathlon-block {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 2.25rem;
-      box-shadow: 0 4px 24px rgba(13,31,60,0.07);
-    }
-    .triathlon-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.75rem;
-    }
-    .triathlon-desc {
-      font-size: 0.95rem; color: var(--mid);
-      line-height: 1.75; margin-bottom: 1.5rem;
-    }
-    .disciplines {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
-    .discipline {
-      background: var(--teal-light);
-      color: var(--teal);
-      font-size: 0.82rem; font-weight: 700;
-      padding: 0.4rem 1rem;
-      border-radius: 20px; letter-spacing: 0.05em;
-    }
-
-    /* ─── CONTACT ─── */
-    #contact { background: var(--white); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .contact-text p {
-      font-size: 1.05rem;
-      color: var(--mid);
-      line-height: 1.85;
-      margin-bottom: 1rem;
-    }
-    .contact-links {
-      display: flex; flex-direction: column; gap: 1rem;
-      margin-top: 2rem;
-    }
-    .contact-link {
-      display: flex; align-items: center; gap: 1rem;
-      color: var(--navy); text-decoration: none;
-      font-weight: 500;
-      padding: 1rem 1.25rem;
-      border: 1px solid #e8edf2;
-      border-radius: 8px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .contact-link:hover {
-      border-color: var(--teal);
-      background: var(--teal-light);
-    }
-    .contact-link-icon {
-      width: 36px; height: 36px;
-      background: var(--teal-light);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .contact-form {
-      display: flex; flex-direction: column; gap: 1.25rem;
-    }
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-    .form-group label {
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase;
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      padding: 0.85rem 1rem;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 6px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      color: var(--dark);
-      background: var(--white);
-      transition: border-color 0.2s;
-      outline: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--teal);
-    }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-submit {
-      background: var(--navy);
-      color: var(--white);
-      padding: 1rem;
-      border: none;
-      border-radius: 6px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      letter-spacing: 0.04em;
-    }
-    .form-submit:hover { background: var(--teal); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--navy);
-      padding: 2rem 4rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-name {
-      font-family: 'Playfair Display', serif;
-      color: var(--white);
-      font-size: 1.1rem;
-    }
-    .footer-note {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
-    }
-    .footer-socials { display: flex; gap: 1rem; }
-    .footer-social {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none; font-size: 0.85rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .footer-social:hover { background: var(--teal); color: var(--white); }
-
-    /* ─── HAMBURGER ─── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; align-items: center; }
-      .hamburger { display: flex; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 56px; left: 0; right: 0;
-        background: rgba(13, 31, 60, 0.98);
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        padding: 1rem 0 1.5rem;
-        z-index: 99;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { width: 100%; text-align: center; }
-      .nav-links a {
-        display: block;
-        padding: 0.9rem 1rem;
-        font-size: 1rem;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-      section { padding: 4rem 1.5rem; }
-      #hero { padding: 5rem 1.5rem 4rem; }
-      .about-grid, .beyond-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
-      .form-row { grid-template-columns: 1fr; }
-    }
+    .animate-bounce-subtle { animation: bounce-subtle 2s infinite; }
   </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#000719",
+            "primary-container": "#0d1f3c",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#7787aa",
+            "secondary": "#006b5f",
+            "secondary-container": "#6df5e1",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#006f64",
+            "on-secondary-fixed": "#00201c",
+            "secondary-fixed": "#70f8e4",
+            "secondary-fixed-dim": "#4fdbc8",
+            "tertiary": "#000817",
+            "tertiary-container": "#152031",
+            "on-tertiary-container": "#7d889c",
+            "surface": "#fcf9f4",
+            "surface-container": "#f0ede9",
+            "surface-container-low": "#f6f3ee",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#ebe8e3",
+            "on-surface": "#1c1c19",
+            "on-surface-variant": "#44474d",
+            "outline": "#75777e",
+            "outline-variant": "#c5c6ce",
+            "background": "#fcf9f4",
+            "on-background": "#1c1c19",
+            "error": "#ba1a1a",
+            "inverse-surface": "#31302d",
+            "inverse-on-surface": "#f3f0eb",
+            "teal": "#00b4a2",
+            "teal-light": "#e8f9f7",
+            "navy": "#0d1f3c",
+            "navy-light": "#1a3259",
+            "sand": "#f7f4ef",
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem",
+          },
+          fontFamily: {
+            headline: ["Manrope", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    }
+  </script>
 </head>
-<body>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container antialiased">
 
   <!-- NAV -->
-  <nav>
-    <a href="#hero" class="nav-logo">AW</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#about" onclick="closeMenu()">About</a></li>
-      <li><a href="#career" onclick="closeMenu()">Career</a></li>
-      <li><a href="#ventures" onclick="closeMenu()">Ventures</a></li>
-      <li><a href="#expertise" onclick="closeMenu()">Expertise</a></li>
-      <li><a href="#beyond" onclick="closeMenu()">Beyond Work</a></li>
-      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+  <nav class="fixed top-0 w-full z-50 bg-primary-container/95 backdrop-blur-xl">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-5 w-full">
+      <a href="#hero" class="text-xl font-headline font-extrabold tracking-tighter text-white uppercase">AW</a>
+      <ul class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight text-sm uppercase" id="nav-links-desktop">
+        <li><a class="text-white/60 hover:text-teal transition-colors" href="#about">About</a></li>
+        <li><a class="text-white/60 hover:text-teal transition-colors" href="#career">Career</a></li>
+        <li><a class="text-white/60 hover:text-teal transition-colors" href="#ventures">Ventures</a></li>
+        <li><a class="text-white/60 hover:text-teal transition-colors" href="#expertise">Expertise</a></li>
+        <li><a class="text-white/60 hover:text-teal transition-colors" href="#beyond">Beyond Work</a></li>
+        <li><a class="bg-secondary text-white px-5 py-2 rounded-sm hover:bg-secondary/90 transition-all" href="#contact">Contact</a></li>
+      </ul>
+      <button class="md:hidden flex flex-col justify-center gap-[5px] p-1" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span class="block w-6 h-[2px] bg-white rounded transition-all" id="bar1"></span>
+        <span class="block w-6 h-[2px] bg-white rounded transition-all" id="bar2"></span>
+        <span class="block w-6 h-[2px] bg-white rounded transition-all" id="bar3"></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="hidden md:hidden bg-primary-container/98 backdrop-blur-xl border-t border-white/5" id="mobile-menu">
+      <div class="flex flex-col items-center py-4">
+        <a class="w-full text-center py-3 text-white/70 hover:text-teal font-headline font-bold text-sm uppercase tracking-wide" href="#about" onclick="closeMenu()">About</a>
+        <a class="w-full text-center py-3 text-white/70 hover:text-teal font-headline font-bold text-sm uppercase tracking-wide" href="#career" onclick="closeMenu()">Career</a>
+        <a class="w-full text-center py-3 text-white/70 hover:text-teal font-headline font-bold text-sm uppercase tracking-wide" href="#ventures" onclick="closeMenu()">Ventures</a>
+        <a class="w-full text-center py-3 text-white/70 hover:text-teal font-headline font-bold text-sm uppercase tracking-wide" href="#expertise" onclick="closeMenu()">Expertise</a>
+        <a class="w-full text-center py-3 text-white/70 hover:text-teal font-headline font-bold text-sm uppercase tracking-wide" href="#beyond" onclick="closeMenu()">Beyond Work</a>
+        <a class="w-full text-center py-3 text-teal font-headline font-bold text-sm uppercase tracking-wide" href="#contact" onclick="closeMenu()">Contact</a>
+      </div>
+    </div>
   </nav>
   <script>
+    let menuOpen = false;
     function toggleMenu() {
-      document.getElementById('nav-links').classList.toggle('open');
-      document.getElementById('hamburger').classList.toggle('open');
+      menuOpen = !menuOpen;
+      document.getElementById('mobile-menu').classList.toggle('hidden', !menuOpen);
+      document.getElementById('bar1').style.transform = menuOpen ? 'translateY(7px) rotate(45deg)' : '';
+      document.getElementById('bar2').style.opacity = menuOpen ? '0' : '1';
+      document.getElementById('bar3').style.transform = menuOpen ? 'translateY(-7px) rotate(-45deg)' : '';
     }
     function closeMenu() {
-      document.getElementById('nav-links').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
+      menuOpen = false;
+      document.getElementById('mobile-menu').classList.add('hidden');
+      document.getElementById('bar1').style.transform = '';
+      document.getElementById('bar2').style.opacity = '1';
+      document.getElementById('bar3').style.transform = '';
     }
   </script>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-content">
-      <p class="hero-eyebrow">Entrepreneur · Engineer · Executive</p>
-      <h1 class="hero-name">Anselm<br/>Waterfield</h1>
-      <p class="hero-statement">30 years. Bootstrapped startups through to exits. Original IP, earned markets — on-premise, the web, SaaS. Each era disrupted what came before. I built into every one of them. AI-first is no different.</p>
-      <p class="hero-tagline">
-        Building technology businesses that matter — from telco infrastructure to enterprise software, and the ventures still to come.
-      </p>
-      <a href="#about" class="hero-cta">
-        Discover my story
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+  <main>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-inner">
-      <div class="about-grid">
-        <div class="about-text">
-          <p class="section-label">About Me</p>
-          <h2 class="section-title">Engineer at heart,<br/>entrepreneur by calling</h2>
-          <div class="divider"></div>
-          <p>
-            My career began in the trenches of the telecommunications industry — working with British Telecom, Racal-Milgo, and Unisys before joining <strong>Optus in 1992</strong> during its startup phase, where I played a significant role in shaping its banking sector strategy and pioneering managed services in Australia.
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-primary-container">
+      <!-- Background gradient orbs -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute top-[-30%] right-[-10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(0,180,162,0.12)_0%,transparent_70%)]"></div>
+        <div class="absolute bottom-[-20%] left-[-5%] w-[40vw] h-[40vw] rounded-full bg-[radial-gradient(circle,rgba(0,180,162,0.08)_0%,transparent_70%)]"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8 w-full pt-24 pb-16">
+        <div class="max-w-3xl">
+          <p class="animate-fade-in-up text-teal font-headline font-extrabold tracking-[0.18em] uppercase text-sm mb-5">Curiosity. Learning. Execution.</p>
+          <h1 class="animate-fade-in-up animate-delay-1 text-5xl md:text-7xl font-headline font-extrabold text-white leading-[1.05] mb-6 tracking-tighter">
+            Anselm<br/>Waterfield
+          </h1>
+          <p class="animate-fade-in-up animate-delay-2 text-lg md:text-xl text-white/90 font-normal leading-relaxed mb-6 max-w-[560px] border-l-[3px] border-teal pl-5">
+            30 years. Bootstrapped startups through to exits. Original IP, earned markets &mdash; on-premise, the web, SaaS. Each era disrupted what came before. I built into every one of them. AI-first is no different.
           </p>
-          <p>
-            From that foundation I moved into building businesses from scratch: an ERP software distribution business, then the creation of what became the <strong>largest and most successful IP owner and supplier of enterprise software to the Australian and New Zealand domestic logistics market</strong>.
+          <p class="animate-fade-in-up animate-delay-3 text-lg text-white/60 font-light leading-relaxed mb-10 max-w-xl">
+            Building technology businesses that matter &mdash; from telco infrastructure to enterprise software, and the ventures still to come.
           </p>
-          <p>
-            Today I'm active as a founder, mentor, and investor — particularly drawn to SME technology businesses where strategic focus and operational discipline can unlock outsized value. I'm based in <strong>Sydney, Australia</strong>.
-          </p>
-        </div>
-        <div class="about-stats">
-          <div class="stat-card">
-            <div class="stat-number">30+</div>
-            <div class="stat-label">Years in Tech & Telco</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">2</div>
-            <div class="stat-label">Major Companies Founded</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">1992</div>
-            <div class="stat-label">Joined Optus at Startup</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">SYD</div>
-            <div class="stat-label">Based in Sydney, AU</div>
+          <div class="animate-fade-in-up animate-delay-4 flex flex-col sm:flex-row gap-4">
+            <a class="bg-secondary text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-sm hover:bg-secondary/90 transition-all flex items-center justify-center group" href="#about">
+              Discover my story
+              <span class="material-symbols-outlined ml-2 text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            <a class="border border-white/20 text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-all text-center" href="#ventures">
+              Portfolio
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 animate-bounce-subtle">
+        <span class="text-[10px] uppercase tracking-[0.3em] text-white">Scroll</span>
+        <div class="w-px h-10 bg-gradient-to-b from-white to-transparent"></div>
+      </div>
+    </section>
 
-  <!-- CAREER -->
-  <section id="career">
-    <div class="section-inner">
-      <p class="section-label">Career</p>
-      <h2 class="section-title">A career built on<br/>building things</h2>
-      <div class="divider"></div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <p class="timeline-period">2012 — Present</p>
-          <p class="timeline-role">Executive Chairman & Founder</p>
-          <p class="timeline-company">contactSPACE · Sydney, Australia</p>
-          <p class="timeline-desc">
-            Co-founded contactSPACE, an enterprise call centre and customer engagement software company. Responsible for strategic direction, capital allocation, and scaling the business across the Australian market and beyond with partners including Genesys, AWS, and Verizon.
-          </p>
-        </div>
-        <div class="timeline-item">
-          <p class="timeline-period">~2000 — 2012</p>
-          <p class="timeline-role">CEO & Founder</p>
-          <p class="timeline-company">Translogix Systems Pty Ltd · Australia / New Zealand</p>
-          <p class="timeline-desc">
-            Founded and scaled Translogix into the largest IP owner, developer, and supplier of enterprise software to the Australian and NZ domestic logistics market. Led the acquisition of Transit Computer Systems in 2010 and won the NSW iAward for Transport &amp; Distribution Solution. In 2012 Translogix was acquired by CargoWise, the world's fastest-growing international logistics execution software company.
-          </p>
-        </div>
-        <div class="timeline-item">
-          <p class="timeline-period">Mid 1990s — 2000s</p>
-          <p class="timeline-role">Founder</p>
-          <p class="timeline-company">ERP Software Distribution Business · Australia</p>
-          <p class="timeline-desc">
-            Established a successful ERP software distribution business, developing deep expertise in enterprise software commercialisation and the go-to-market strategies that would underpin the Translogix years.
-          </p>
-        </div>
-        <div class="timeline-item">
-          <p class="timeline-period">1992 — Mid 1990s</p>
-          <p class="timeline-role">Senior Executive</p>
-          <p class="timeline-company">Optus · Sydney, Australia</p>
-          <p class="timeline-desc">
-            Joined Optus in its startup phase and was a significant contributor to its success in the banking industry and the introduction of managed services to the Australian market — a genuinely formative period in Australian telecommunications history.
-          </p>
-        </div>
-        <div class="timeline-item">
-          <p class="timeline-period">Late 1980s — 1992</p>
-          <p class="timeline-role">Engineer</p>
-          <p class="timeline-company">British Telecom · Racal-Milgo · Unisys</p>
-          <p class="timeline-desc">
-            Began career as a telecommunications engineer, building the technical foundations and rigorous problem-solving mindset that would shape every subsequent venture.
-          </p>
+    <!-- ABOUT -->
+    <section id="about" class="py-24 md:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          <div>
+            <span class="text-teal font-bold tracking-[0.2em] uppercase text-xs mb-3 block">About Me</span>
+            <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-navy mb-6 tracking-tight leading-tight">Engineer at heart,<br/>entrepreneur by calling</h2>
+            <div class="w-12 h-[3px] bg-teal mb-8"></div>
+            <div class="space-y-5 text-on-surface-variant text-[1.05rem] leading-[1.85]">
+              <p>
+                My career began in the trenches of the telecommunications industry &mdash; working with British Telecom, Racal-Milgo, and Unisys before joining <strong class="text-navy">Optus in 1992</strong> during its startup phase, where I played a significant role in shaping its banking sector strategy and pioneering managed services in Australia.
+              </p>
+              <p>
+                From that foundation I moved into building businesses from scratch: an ERP software distribution business, then the creation of what became the <strong class="text-navy">largest and most successful IP owner and supplier of enterprise software to the Australian and New Zealand domestic logistics market</strong>.
+              </p>
+              <p>
+                Today I'm active as a founder, mentor, and investor &mdash; particularly drawn to SME technology businesses where strategic focus and operational discipline can unlock outsized value. I'm based in <strong class="text-navy">Sydney, Australia</strong>.
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-sand rounded-lg p-6 border-l-[3px] border-teal">
+              <span class="block text-4xl md:text-5xl font-headline font-black text-navy leading-none mb-2 tracking-tighter">30+</span>
+              <span class="text-xs uppercase tracking-[0.15em] font-semibold text-on-surface-variant">Years in Tech &amp; Telco</span>
+            </div>
+            <div class="bg-sand rounded-lg p-6 border-l-[3px] border-teal">
+              <span class="block text-4xl md:text-5xl font-headline font-black text-navy leading-none mb-2 tracking-tighter">2</span>
+              <span class="text-xs uppercase tracking-[0.15em] font-semibold text-on-surface-variant">Major Companies Founded</span>
+            </div>
+            <div class="bg-sand rounded-lg p-6 border-l-[3px] border-teal">
+              <span class="block text-4xl md:text-5xl font-headline font-black text-navy leading-none mb-2 tracking-tighter">1992</span>
+              <span class="text-xs uppercase tracking-[0.15em] font-semibold text-on-surface-variant">Joined Optus at Startup</span>
+            </div>
+            <div class="bg-sand rounded-lg p-6 border-l-[3px] border-teal">
+              <span class="block text-4xl md:text-5xl font-headline font-black text-navy leading-none mb-2 tracking-tighter">SYD</span>
+              <span class="text-xs uppercase tracking-[0.15em] font-semibold text-on-surface-variant">Based in Sydney, AU</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- VENTURES -->
-  <section id="ventures">
-    <div class="section-inner">
-      <p class="section-label">Ventures</p>
-      <h2 class="section-title">Companies I've built</h2>
-      <div class="divider"></div>
-      <div class="ventures-grid">
-        <div class="venture-card">
-          <div class="venture-icon">📞</div>
-          <p class="venture-type">Current Venture</p>
-          <p class="venture-name">contactSPACE</p>
-          <p class="venture-desc">
-            An enterprise contact centre and customer engagement platform helping organisations deliver smarter, more efficient customer interactions. Built on deep integration partnerships with Genesys, AWS, and Verizon and focused on the ANZ and broader APAC market.
-          </p>
-          <span class="venture-tag">Enterprise Software</span>
-        </div>
-        <div class="venture-card">
-          <div class="venture-icon">🚛</div>
-          <p class="venture-type">Acquired 2012 by CargoWise</p>
-          <p class="venture-name">Translogix Systems</p>
-          <p class="venture-desc">
-            Australia and New Zealand's largest provider of enterprise software to the domestic logistics market. Built from the ground up to become the definitive platform for transport operators, culminating in acquisition by WiseTech Global's CargoWise division in July 2012.
-          </p>
-          <span class="venture-tag">Logistics Software · Acquired</span>
-        </div>
-        <div class="venture-card">
-          <div class="venture-icon">🤝</div>
-          <p class="venture-type">Advisory & Investment</p>
-          <p class="venture-name">Mentoring & SME Investment</p>
-          <p class="venture-desc">
-            Actively working with early-to-growth stage technology businesses as a mentor and investor. Particularly interested in SME technology companies where strategic clarity, operational discipline, and market focus can create significant value.
-          </p>
-          <span class="venture-tag">Technology · Strategy · M&A</span>
+    <!-- CAREER -->
+    <section id="career" class="py-24 md:py-32 bg-sand">
+      <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <span class="text-teal font-bold tracking-[0.2em] uppercase text-xs mb-3 block">Career</span>
+        <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-navy mb-6 tracking-tight leading-tight">A career built on<br/>building things</h2>
+        <div class="w-12 h-[3px] bg-teal mb-12"></div>
+        <div class="space-y-4">
+          <!-- Timeline: contactSPACE -->
+          <div class="group grid md:grid-cols-[200px_1fr_48px] gap-6 md:gap-8 p-8 md:p-10 bg-white rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-500 items-start border-l-4 border-teal">
+            <div class="text-teal font-bold text-sm tracking-wide uppercase">2012 &mdash; Present</div>
+            <div>
+              <h3 class="text-xl md:text-2xl font-headline font-bold text-navy group-hover:text-secondary transition-colors">Executive Chairman &amp; Founder</h3>
+              <p class="text-secondary font-medium mb-3 text-sm">contactSPACE &middot; Sydney, Australia</p>
+              <p class="text-sm text-on-surface-variant leading-relaxed">Co-founded contactSPACE, an enterprise call centre and customer engagement software company. Responsible for strategic direction, capital allocation, and scaling the business across the Australian market and beyond with partners including Genesys, AWS, and Verizon.</p>
+            </div>
+            <div class="hidden md:flex justify-end">
+              <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary text-3xl transition-colors">corporate_fare</span>
+            </div>
+          </div>
+          <!-- Timeline: Translogix -->
+          <div class="group grid md:grid-cols-[200px_1fr_48px] gap-6 md:gap-8 p-8 md:p-10 bg-white rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-500 items-start">
+            <div class="text-teal font-bold text-sm tracking-wide uppercase">~2000 &mdash; 2012</div>
+            <div>
+              <h3 class="text-xl md:text-2xl font-headline font-bold text-navy group-hover:text-secondary transition-colors">CEO &amp; Founder</h3>
+              <p class="text-secondary font-medium mb-3 text-sm">Translogix Systems Pty Ltd &middot; Australia / New Zealand</p>
+              <p class="text-sm text-on-surface-variant leading-relaxed">Founded and scaled Translogix into the largest IP owner, developer, and supplier of enterprise software to the Australian and NZ domestic logistics market. Led the acquisition of Transit Computer Systems in 2010 and won the NSW iAward for Transport &amp; Distribution Solution. In 2012 Translogix was acquired by CargoWise.</p>
+            </div>
+            <div class="hidden md:flex justify-end">
+              <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary text-3xl transition-colors">local_shipping</span>
+            </div>
+          </div>
+          <!-- Timeline: ERP -->
+          <div class="group grid md:grid-cols-[200px_1fr_48px] gap-6 md:gap-8 p-8 md:p-10 bg-white rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-500 items-start">
+            <div class="text-teal font-bold text-sm tracking-wide uppercase">Mid 1990s &mdash; 2000s</div>
+            <div>
+              <h3 class="text-xl md:text-2xl font-headline font-bold text-navy group-hover:text-secondary transition-colors">Founder</h3>
+              <p class="text-secondary font-medium mb-3 text-sm">ERP Software Distribution Business &middot; Australia</p>
+              <p class="text-sm text-on-surface-variant leading-relaxed">Established a successful ERP software distribution business, developing deep expertise in enterprise software commercialisation and the go-to-market strategies that would underpin the Translogix years.</p>
+            </div>
+            <div class="hidden md:flex justify-end">
+              <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary text-3xl transition-colors">inventory</span>
+            </div>
+          </div>
+          <!-- Timeline: Optus -->
+          <div class="group grid md:grid-cols-[200px_1fr_48px] gap-6 md:gap-8 p-8 md:p-10 bg-white rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-500 items-start">
+            <div class="text-teal font-bold text-sm tracking-wide uppercase">1992 &mdash; Mid 1990s</div>
+            <div>
+              <h3 class="text-xl md:text-2xl font-headline font-bold text-navy group-hover:text-secondary transition-colors">Senior Executive</h3>
+              <p class="text-secondary font-medium mb-3 text-sm">Optus &middot; Sydney, Australia</p>
+              <p class="text-sm text-on-surface-variant leading-relaxed">Joined Optus in its startup phase and was a significant contributor to its success in the banking industry and the introduction of managed services to the Australian market &mdash; a genuinely formative period in Australian telecommunications history.</p>
+            </div>
+            <div class="hidden md:flex justify-end">
+              <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary text-3xl transition-colors">cell_tower</span>
+            </div>
+          </div>
+          <!-- Timeline: Engineer -->
+          <div class="group grid md:grid-cols-[200px_1fr_48px] gap-6 md:gap-8 p-8 md:p-10 bg-white rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-500 items-start">
+            <div class="text-teal font-bold text-sm tracking-wide uppercase">Late 1980s &mdash; 1992</div>
+            <div>
+              <h3 class="text-xl md:text-2xl font-headline font-bold text-navy group-hover:text-secondary transition-colors">Engineer</h3>
+              <p class="text-secondary font-medium mb-3 text-sm">British Telecom &middot; Racal-Milgo &middot; Unisys</p>
+              <p class="text-sm text-on-surface-variant leading-relaxed">Began career as a telecommunications engineer, building the technical foundations and rigorous problem-solving mindset that would shape every subsequent venture.</p>
+            </div>
+            <div class="hidden md:flex justify-end">
+              <span class="material-symbols-outlined text-outline-variant group-hover:text-secondary text-3xl transition-colors">settings_input_component</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EXPERTISE -->
-  <section id="expertise">
-    <div class="section-inner">
-      <p class="section-label">Expertise</p>
-      <h2 class="section-title">Where I can add value</h2>
-      <div class="divider"></div>
-      <div class="skills-grid">
-        <div class="skill-item">
-          <p class="skill-name">Strategy & Vision</p>
-          <p class="skill-desc">Translating market insight into actionable strategic direction — from startup positioning through to mature business transformation.</p>
+    <!-- VENTURES -->
+    <section id="ventures" class="py-24 md:py-32 bg-primary-container">
+      <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-16">
+          <span class="text-teal font-bold tracking-[0.2em] uppercase text-xs mb-3 block">Ventures</span>
+          <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-white mb-6 tracking-tight">Companies I've built</h2>
+          <div class="h-[3px] w-12 bg-teal mx-auto"></div>
         </div>
-        <div class="skill-item">
-          <p class="skill-name">Mergers & Acquisitions</p>
-          <p class="skill-desc">Hands-on M&A experience on both sides of the table, including the successful acquisition of Translogix by CargoWise.</p>
-        </div>
-        <div class="skill-item">
-          <p class="skill-name">Innovation & R&D</p>
-          <p class="skill-desc">Building product development processes that balance customer needs with technical ambition — creating software products that dominate their niches.</p>
-        </div>
-        <div class="skill-item">
-          <p class="skill-name">Sales & Commercialisation</p>
-          <p class="skill-desc">Taking products from development to revenue — go-to-market strategy, channel development, and enterprise sales in competitive B2B markets.</p>
-        </div>
-        <div class="skill-item">
-          <p class="skill-name">Organisational Development</p>
-          <p class="skill-desc">Building teams and cultures that scale — from the first hires through to multi-functional organisations spanning engineering, sales, and support.</p>
-        </div>
-        <div class="skill-item">
-          <p class="skill-name">Telecommunications</p>
-          <p class="skill-desc">Deep roots in telco infrastructure and managed services, providing a technical foundation that informs every technology investment and product decision.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- contactSPACE -->
+          <div class="bg-navy-light/40 border border-white/10 rounded-lg p-8 md:p-10 group hover:border-teal/50 transition-all relative overflow-hidden">
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-teal-light rounded-xl flex items-center justify-center mb-6 text-2xl">&#x1F4DE;</div>
+              <p class="text-teal font-bold tracking-[0.1em] uppercase text-xs mb-3">Current Venture</p>
+              <h3 class="text-xl font-headline font-bold text-white mb-3">contactSPACE</h3>
+              <p class="text-on-primary-container text-sm leading-relaxed mb-6">An enterprise contact centre and customer engagement platform helping organisations deliver smarter, more efficient customer interactions. Built on deep integration partnerships with Genesys, AWS, and Verizon.</p>
+              <span class="inline-block bg-white/5 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">Enterprise Software</span>
+            </div>
+          </div>
+          <!-- Translogix -->
+          <div class="bg-navy-light/40 border border-white/10 rounded-lg p-8 md:p-10 group hover:border-teal/50 transition-all relative overflow-hidden">
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-teal-light rounded-xl flex items-center justify-center mb-6 text-2xl">&#x1F69B;</div>
+              <p class="text-teal font-bold tracking-[0.1em] uppercase text-xs mb-3">Acquired 2012 by CargoWise</p>
+              <h3 class="text-xl font-headline font-bold text-white mb-3">Translogix Systems</h3>
+              <p class="text-on-primary-container text-sm leading-relaxed mb-6">Australia and New Zealand's largest provider of enterprise software to the domestic logistics market. Built from the ground up, culminating in acquisition by WiseTech Global's CargoWise division in July 2012.</p>
+              <span class="inline-block bg-white/5 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">Logistics Software &middot; Acquired</span>
+            </div>
+          </div>
+          <!-- SME Investment -->
+          <div class="bg-navy-light/40 border border-white/10 rounded-lg p-8 md:p-10 group hover:border-teal/50 transition-all relative overflow-hidden">
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-teal-light rounded-xl flex items-center justify-center mb-6 text-2xl">&#x1F91D;</div>
+              <p class="text-teal font-bold tracking-[0.1em] uppercase text-xs mb-3">Advisory &amp; Investment</p>
+              <h3 class="text-xl font-headline font-bold text-white mb-3">Mentoring &amp; SME Investment</h3>
+              <p class="text-on-primary-container text-sm leading-relaxed mb-6">Actively working with early-to-growth stage technology businesses as a mentor and investor. Focused on SME technology companies where strategic clarity and operational discipline can create significant value.</p>
+              <span class="inline-block bg-white/5 text-white/60 text-xs font-semibold px-3 py-1.5 rounded-full">Technology &middot; Strategy &middot; M&amp;A</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- BEYOND -->
-  <section id="beyond">
-    <div class="section-inner">
-      <p class="section-label">Beyond Work</p>
-      <h2 class="section-title">The other side<br/>of the ledger</h2>
-      <div class="divider"></div>
-      <div class="beyond-grid">
-        <div class="beyond-text">
-          <p>
-            Entrepreneurship is a full-person pursuit — and I've always believed that the discipline and resilience you build outside of work feeds directly into what you're capable of inside it.
-          </p>
-          <p>
-            I'm an aspiring triathlete, which means I spend a reasonable amount of time convincing myself that the alarm going off at 5am is, in fact, a good idea. The swim-bike-run combination suits me: each discipline requires a different kind of focus, and stringing them together into something coherent feels surprisingly like building a company.
-          </p>
-          <p>
-            Photography is another constant — specifically black and white, and almost exclusively with a Leica. There's something about the constraints of monochrome that forces you to see differently: light, shadow, geometry, and the decisive moment matter far more than colour. The Leica is an extension of that philosophy — unhurried, precise, and completely analogue in its demands on your attention.
-          </p>
-          <p>
-            I'm also an active mentor — I genuinely enjoy spending time with founders who are earlier in their journeys, working through the messy, exciting, difficult decisions that define whether a business reaches its potential.
-          </p>
+    <!-- EXPERTISE -->
+    <section id="expertise" class="py-24 md:py-32 bg-navy">
+      <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-16">
+          <span class="text-teal font-bold tracking-[0.3em] uppercase text-xs mb-3 block">Expertise</span>
+          <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-white tracking-tight">Where I can add value</h2>
         </div>
-        <div class="beyond-cards">
-          <div class="triathlon-block">
-            <p class="triathlon-title">Wannabe Triathlete 🏊 🚴 🏃</p>
-            <p class="triathlon-desc">
-              Triathlon rewards systems thinking, incremental improvement, and the willingness to be a beginner again. Still working on the "wannabe" part.
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white/[0.04] border border-white/10 rounded-lg p-8 hover:bg-teal/10 hover:border-teal/30 transition-all group">
+            <span class="material-symbols-outlined text-teal mb-4 text-3xl block group-hover:scale-110 transition-transform">insights</span>
+            <h4 class="font-headline font-bold text-white text-lg mb-2">Strategy &amp; Vision</h4>
+            <p class="text-sm text-white/50 leading-relaxed">Translating market insight into actionable strategic direction &mdash; from startup positioning through to mature business transformation.</p>
+          </div>
+          <div class="bg-white/[0.04] border border-white/10 rounded-lg p-8 hover:bg-teal/10 hover:border-teal/30 transition-all group">
+            <span class="material-symbols-outlined text-teal mb-4 text-3xl block group-hover:scale-110 transition-transform">account_balance</span>
+            <h4 class="font-headline font-bold text-white text-lg mb-2">Mergers &amp; Acquisitions</h4>
+            <p class="text-sm text-white/50 leading-relaxed">Hands-on M&amp;A experience on both sides of the table, including the successful acquisition of Translogix by CargoWise.</p>
+          </div>
+          <div class="bg-white/[0.04] border border-white/10 rounded-lg p-8 hover:bg-teal/10 hover:border-teal/30 transition-all group">
+            <span class="material-symbols-outlined text-teal mb-4 text-3xl block group-hover:scale-110 transition-transform">bolt</span>
+            <h4 class="font-headline font-bold text-white text-lg mb-2">Innovation &amp; R&amp;D</h4>
+            <p class="text-sm text-white/50 leading-relaxed">Building product development processes that balance customer needs with technical ambition &mdash; creating software products that dominate their niches.</p>
+          </div>
+          <div class="bg-white/[0.04] border border-white/10 rounded-lg p-8 hover:bg-teal/10 hover:border-teal/30 transition-all group">
+            <span class="material-symbols-outlined text-teal mb-4 text-3xl block group-hover:scale-110 transition-transform">trending_up</span>
+            <h4 class="font-headline font-bold text-white text-lg mb-2">Sales &amp; Commercialisation</h4>
+            <p class="text-sm text-white/50 leading-relaxed">Taking products from development to revenue &mdash; go-to-market strategy, channel development, and enterprise sales in competitive B2B markets.</p>
+          </div>
+          <div class="bg-white/[0.04] border border-white/10 rounded-lg p-8 hover:bg-teal/10 hover:border-teal/30 transition-all group">
+            <span class="material-symbols-outlined text-teal mb-4 text-3xl block group-hover:scale-110 transition-transform">groups</span>
+            <h4 class="font-headline font-bold text-white text-lg mb-2">Organisational Development</h4>
+            <p class="text-sm text-white/50 leading-relaxed">Building teams and cultures that scale &mdash; from the first hires through to multi-functional organisations spanning engineering, sales, and support.</p>
+          </div>
+          <div class="bg-white/[0.04] border border-white/10 rounded-lg p-8 hover:bg-teal/10 hover:border-teal/30 transition-all group">
+            <span class="material-symbols-outlined text-teal mb-4 text-3xl block group-hover:scale-110 transition-transform">cell_tower</span>
+            <h4 class="font-headline font-bold text-white text-lg mb-2">Telecommunications</h4>
+            <p class="text-sm text-white/50 leading-relaxed">Deep roots in telco infrastructure and managed services, providing a technical foundation that informs every technology investment and product decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEYOND WORK -->
+    <section id="beyond" class="py-24 md:py-32 bg-sand">
+      <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <span class="text-teal font-bold tracking-[0.2em] uppercase text-xs mb-3 block">Beyond Work</span>
+        <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-navy mb-6 tracking-tight leading-tight">The other side<br/>of the ledger</h2>
+        <div class="w-12 h-[3px] bg-teal mb-12"></div>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div class="space-y-5 text-on-surface-variant text-[1.05rem] leading-[1.85]">
+            <p>Entrepreneurship is a full-person pursuit &mdash; and I've always believed that the discipline and resilience you build outside of work feeds directly into what you're capable of inside it.</p>
+            <p>I'm an aspiring triathlete, which means I spend a reasonable amount of time convincing myself that the alarm going off at 5am is, in fact, a good idea. The swim-bike-run combination suits me: each discipline requires a different kind of focus, and stringing them together into something coherent feels surprisingly like building a company.</p>
+            <p>Photography is another constant &mdash; specifically black and white, and almost exclusively with a Leica. There's something about the constraints of monochrome that forces you to see differently: light, shadow, geometry, and the decisive moment matter far more than colour.</p>
+            <p>I'm also an active mentor &mdash; I genuinely enjoy spending time with founders who are earlier in their journeys, working through the messy, exciting, difficult decisions that define whether a business reaches its potential.</p>
+          </div>
+          <div class="space-y-5">
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <h3 class="text-xl font-headline font-bold text-navy mb-3">Wannabe Triathlete</h3>
+              <p class="text-sm text-on-surface-variant leading-relaxed mb-5">Triathlon rewards systems thinking, incremental improvement, and the willingness to be a beginner again. Still working on the "wannabe" part.</p>
+              <div class="flex gap-2 flex-wrap">
+                <span class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">Swim</span>
+                <span class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">Bike</span>
+                <span class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">Run</span>
+                <span class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">Sydney-based</span>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <h3 class="text-xl font-headline font-bold text-navy mb-3">Photography</h3>
+              <p class="text-sm text-on-surface-variant leading-relaxed mb-5">Black and white. Leica. The discipline of seeing in monochrome &mdash; light, shadow, and the decisive moment. Follow along on Instagram.</p>
+              <div class="flex gap-2 flex-wrap">
+                <span class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">Black &amp; White</span>
+                <span class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">Leica</span>
+                <a href="https://www.instagram.com/anselm_w" target="_blank" class="bg-teal-light text-teal text-xs font-bold px-3 py-1.5 rounded-full tracking-wide hover:bg-teal hover:text-white transition-colors no-underline">@anselm_w</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 md:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="bg-primary-container rounded-lg overflow-hidden flex flex-col lg:flex-row">
+          <!-- Left: Form -->
+          <div class="p-8 md:p-12 lg:p-16 flex-1">
+            <span class="text-teal font-bold tracking-[0.2em] uppercase text-xs mb-3 block">Get in Touch</span>
+            <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-white mb-4 tracking-tight leading-tight">Let's have<br/>a conversation</h2>
+            <div class="w-12 h-[3px] bg-teal mb-8"></div>
+            <p class="text-on-primary-container text-base mb-10 leading-relaxed">I'm always open to conversations with founders, executives, and investors &mdash; whether you're looking for a mentor, exploring an acquisition, or just want to exchange ideas about where enterprise technology is heading.</p>
+            <form class="space-y-5" action="https://formspree.io/f/mnjgzgdq" method="POST" onsubmit="handleSubmit(event)">
+              <input type="hidden" name="_subject" value="New message from anselmwaterfield.com" />
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-on-primary-container font-bold mb-2">First Name</label>
+                  <input type="text" name="first_name" placeholder="Jane" required class="w-full bg-white/5 border border-white/10 rounded-sm py-3.5 px-5 text-white placeholder:text-white/30 focus:border-teal focus:ring-0 transition-colors" />
+                </div>
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-on-primary-container font-bold mb-2">Last Name</label>
+                  <input type="text" name="last_name" placeholder="Smith" required class="w-full bg-white/5 border border-white/10 rounded-sm py-3.5 px-5 text-white placeholder:text-white/30 focus:border-teal focus:ring-0 transition-colors" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-on-primary-container font-bold mb-2">Email</label>
+                <input type="email" name="email" placeholder="jane@company.com" required class="w-full bg-white/5 border border-white/10 rounded-sm py-3.5 px-5 text-white placeholder:text-white/30 focus:border-teal focus:ring-0 transition-colors" />
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-on-primary-container font-bold mb-2">What's this about?</label>
+                <select name="topic" class="w-full bg-white/5 border border-white/10 rounded-sm py-3.5 px-5 text-white/70 focus:border-teal focus:ring-0 transition-colors">
+                  <option value="">Select a topic...</option>
+                  <option>Mentoring / Advisory</option>
+                  <option>Investment Opportunity</option>
+                  <option>Speaking / Media</option>
+                  <option>contactSPACE</option>
+                  <option>General Enquiry</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-widest text-on-primary-container font-bold mb-2">Message</label>
+                <textarea name="message" rows="4" placeholder="Tell me a little about what you have in mind..." required class="w-full bg-white/5 border border-white/10 rounded-sm py-3.5 px-5 text-white placeholder:text-white/30 focus:border-teal focus:ring-0 transition-colors resize-vertical"></textarea>
+              </div>
+              <button type="submit" id="submit-btn" class="w-full bg-secondary text-white py-4 font-bold uppercase tracking-[0.15em] hover:bg-secondary/90 transition-all rounded-sm text-sm">Send Message &rarr;</button>
+              <p id="form-success" class="hidden text-teal font-semibold text-center py-3">Thanks &mdash; I'll be in touch soon.</p>
+              <p id="form-error" class="hidden text-red-500 font-semibold text-center py-3">Something went wrong. Please email me directly at anselm@anselmwaterfield.com</p>
+            </form>
+            <p class="text-xs text-on-primary-container/40 mt-4 text-center">
+              Protected by reCAPTCHA &mdash;
+              <a href="https://policies.google.com/privacy" target="_blank" class="underline">Privacy</a> &amp;
+              <a href="https://policies.google.com/terms" target="_blank" class="underline">Terms</a>
             </p>
-            <div class="disciplines">
-              <span class="discipline">Swim</span>
-              <span class="discipline">Bike</span>
-              <span class="discipline">Run</span>
-              <span class="discipline">Sydney-based</span>
-            </div>
           </div>
-          <div class="triathlon-block" style="margin-top: 1.5rem;">
-            <p class="triathlon-title">Photography 📷</p>
-            <p class="triathlon-desc">
-              Black and white. Leica. The discipline of seeing in monochrome — light, shadow, and the decisive moment. Follow along on Instagram.
-            </p>
-            <div class="disciplines">
-              <span class="discipline">Black &amp; White</span>
-              <span class="discipline">Leica</span>
-              <a href="https://www.instagram.com/anselm_w" target="_blank" class="discipline" style="text-decoration:none;">@anselm_w</a>
+          <!-- Right: Contact info -->
+          <div class="lg:w-[340px] bg-secondary p-8 md:p-12 lg:p-16 flex flex-col justify-between">
+            <div>
+              <h4 class="text-white font-headline font-bold text-xl mb-8">Connect</h4>
+              <div class="space-y-6">
+                <a href="https://x.com/anselmw" target="_blank" class="flex items-center gap-4 text-white/80 hover:text-white transition-colors group no-underline">
+                  <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors text-lg flex-shrink-0">&#x1D54F;</div>
+                  <span class="text-sm font-medium">@anselmw on X / Twitter</span>
+                </a>
+                <a href="https://www.instagram.com/anselm_w" target="_blank" class="flex items-center gap-4 text-white/80 hover:text-white transition-colors group no-underline">
+                  <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors flex-shrink-0"><span class="material-symbols-outlined text-xl">photo_camera</span></div>
+                  <span class="text-sm font-medium">@anselm_w on Instagram</span>
+                </a>
+                <a href="mailto:anselm@anselmwaterfield.com" class="flex items-center gap-4 text-white/80 hover:text-white transition-colors group no-underline">
+                  <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors flex-shrink-0"><span class="material-symbols-outlined text-xl">mail</span></div>
+                  <span class="text-sm font-medium">anselm@anselmwaterfield.com</span>
+                </a>
+                <div class="flex items-center gap-4 text-white/80">
+                  <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-xl">location_on</span></div>
+                  <span class="text-sm font-medium">Sydney, Australia</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-inner">
-      <p class="section-label">Get in Touch</p>
-      <h2 class="section-title">Let's have<br/>a conversation</h2>
-      <div class="divider"></div>
-      <div class="contact-grid">
-        <div class="contact-text">
-          <p>
-            I'm always open to conversations with founders, executives, and investors — whether you're looking for a mentor, exploring an acquisition, or just want to exchange ideas about where enterprise technology is heading.
-          </p>
-          <p>
-            I'm particularly interested in meeting technology businesses at growth stage that are looking for strategic input, capital, or connections.
-          </p>
-          <div class="contact-links">
-            <a href="https://x.com/anselmw" target="_blank" class="contact-link">
-              <div class="contact-link-icon">𝕏</div>
-              <span>@anselmw on X / Twitter</span>
-            </a>
-            <a href="https://www.instagram.com/anselm_w" target="_blank" class="contact-link">
-              <div class="contact-link-icon">📷</div>
-              <span>@anselm_w on Instagram</span>
-            </a>
-            <a href="http://www.anselmwaterfield.com" target="_blank" class="contact-link">
-              <div class="contact-link-icon">🌐</div>
-              <span>anselmwaterfield.com</span>
-            </a>
-            <a href="mailto:anselm@anselmwaterfield.com" class="contact-link">
-              <div class="contact-link-icon">✉</div>
-              <span>anselm@anselmwaterfield.com</span>
-            </a>
-          </div>
-        </div>
-        <form class="contact-form" action="https://formspree.io/f/mnjgzgdq" method="POST" onsubmit="handleSubmit(event)">
-          <input type="hidden" name="_subject" value="New message from anselmwaterfield.com" />
-          <input type="hidden" name="_next" value="" />
-          <div class="form-row">
-            <div class="form-group">
-              <label for="first-name">First Name</label>
-              <input type="text" id="first-name" name="first_name" placeholder="Jane" required />
-            </div>
-            <div class="form-group">
-              <label for="last-name">Last Name</label>
-              <input type="text" id="last-name" name="last_name" placeholder="Smith" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
-          </div>
-          <div class="form-group">
-            <label for="topic">What's this about?</label>
-            <select id="topic" name="topic">
-              <option value="">Select a topic…</option>
-              <option>Mentoring / Advisory</option>
-              <option>Investment Opportunity</option>
-              <option>Speaking / Media</option>
-              <option>contactSPACE</option>
-              <option>General Enquiry</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell me a little about what you have in mind…" required></textarea>
-          </div>
-          <button type="submit" class="form-submit" id="submit-btn">Send Message →</button>
-          <p id="form-success" style="display:none; color: var(--teal); font-weight:600; text-align:center; padding: 0.75rem;">Thanks — I'll be in touch soon.</p>
-          <p id="form-error" style="display:none; color: #e53e3e; font-weight:600; text-align:center; padding: 0.75rem;">Something went wrong. Please email me directly at anselm@anselmwaterfield.com</p>
-        </form>
-
-        <script>
-          async function handleSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const btn = document.getElementById('submit-btn');
-            btn.textContent = 'Verifying…';
-            btn.disabled = true;
-            try {
-              const token = await grecaptcha.execute('6Le77YksAAAAAGpR1mBNHzi84BKsWLMv1f1qlKjG', { action: 'contact' });
-              const data = new FormData(form);
-              data.append('g-recaptcha-response', token);
-              const res = await fetch(form.action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-              });
-              if (res.ok) {
-                form.reset();
-                btn.style.display = 'none';
-                document.getElementById('form-success').style.display = 'block';
-              } else {
-                throw new Error();
-              }
-            } catch {
-              btn.textContent = 'Send Message →';
-              btn.disabled = false;
-              document.getElementById('form-error').style.display = 'block';
-            }
-          }
-        </script>
-        <p style="font-size:0.75rem; color: var(--light); margin-top: 0.5rem; text-align:center;">
-          Protected by reCAPTCHA —
-          <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--light);">Privacy</a> &
-          <a href="https://policies.google.com/terms" target="_blank" style="color: var(--light);">Terms</a>
-        </p>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer>
-    <span class="footer-name">Anselm Waterfield</span>
-    <span class="footer-note">Sydney, Australia · © 2026</span>
-    <div class="footer-socials">
-      <a href="https://x.com/anselmw" target="_blank" class="footer-social" title="X / Twitter">𝕏</a>
-      <a href="https://www.instagram.com/anselm_w" target="_blank" class="footer-social" title="Instagram">📷</a>
-      <a href="mailto:anselm@anselmwaterfield.com" class="footer-social" title="Email">✉</a>
+  <footer class="bg-navy py-12">
+    <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-6 md:px-8 w-full border-t border-white/10 pt-12 gap-6">
+      <div class="text-center md:text-left">
+        <span class="text-lg font-headline font-bold text-white uppercase tracking-widest">Anselm Waterfield</span>
+        <p class="text-sm text-white/40 mt-1">Precision Engineering. Strategic Vision.</p>
+      </div>
+      <div class="flex gap-4">
+        <a href="https://x.com/anselmw" target="_blank" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:bg-teal hover:text-white hover:border-teal transition-all text-sm">&#x1D54F;</a>
+        <a href="https://www.instagram.com/anselm_w" target="_blank" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:bg-teal hover:text-white hover:border-teal transition-all"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
+        <a href="mailto:anselm@anselmwaterfield.com" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:bg-teal hover:text-white hover:border-teal transition-all"><span class="material-symbols-outlined text-sm">mail</span></a>
+      </div>
+      <div class="text-sm text-white/30">
+        &copy; 2026 Anselm Waterfield
+      </div>
     </div>
   </footer>
+
+  <!-- Form submit handler -->
+  <script>
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'Verifying...';
+      btn.disabled = true;
+      try {
+        const token = await grecaptcha.execute('6Le77YksAAAAAGpR1mBNHzi84BKsWLMv1f1qlKjG', { action: 'contact' });
+        const data = new FormData(form);
+        data.append('g-recaptcha-response', token);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          btn.style.display = 'none';
+          document.getElementById('form-success').style.display = 'block';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        btn.textContent = 'Send Message \u2192';
+        btn.disabled = false;
+        document.getElementById('form-error').style.display = 'block';
+      }
+    }
+  </script>
 
 </body>
 </html>
